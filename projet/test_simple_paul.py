@@ -31,7 +31,6 @@ print(a_matrix)
 nrb_max_sval=min(a_matrix.shape)
 
 
-@profile
 def test_primme():
     print("Test PRIMME")
     try :
@@ -45,7 +44,6 @@ def test_primme():
         print(Exception)
 
 
-@profile
 def test_numpy():
     print("Numpy svd")
     try :
@@ -60,7 +58,6 @@ def test_numpy():
         print(error)
 
 
-@profile
 def test_scipy():
     print("Scipy svd")
     try :
