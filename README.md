@@ -37,3 +37,11 @@ Datasets
 - données atmosphérique, thermodynamique
 - matrice réelle (coefficients uniformément répartis sur [-1,1] ou [0,1])
 
+test_paul.py et test_simple_paul.py nécessite d'installer primme à partir des sources
+git clone https://github.com/primme/primme
+cd primme
+make python_install
+
+pour utiliser test_paul.py, il faut utiliser line_profiler ou memory_profiler
+comme indiqué sur ce lien
+https://www.realpythonproject.com/how-to-benchmark-functions-in-python/

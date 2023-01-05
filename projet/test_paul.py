@@ -2,7 +2,7 @@ import numpy as np
 from scipy.linalg import svd
 import primme
 import time
-
+import gc
 # sigma_matrix = np.diag([1,2,3])
 
 # print(sigma_matrix.shape)
@@ -77,5 +77,7 @@ def test_scipy():
 
 if __name__== '__main__':
     test_primme()
+    gc.collect()
     test_numpy()
+    gc.collect()
     test_scipy()
