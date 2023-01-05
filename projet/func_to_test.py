@@ -2,14 +2,8 @@ import numpy as np
 from scipy.linalg import svd
 import primme
 import time
-import gc
-import numpy as np
-from scipy.linalg import svd
-import primme
-import time
-import gc
 
-@profile
+
 def test_primme(matrix,sv_number):
     print("Test PRIMME")
     try :
@@ -26,7 +20,6 @@ def test_primme(matrix,sv_number):
         print(Exception)
 
 
-@profile
 def test_numpy(matrix):
     print("Numpy svd")
     try :
@@ -45,7 +38,6 @@ def test_numpy(matrix):
         print(error)
 
 
-@profile
 def test_scipy(matrix):
     print("Scipy svd")
     try :
@@ -64,19 +56,3 @@ def test_scipy(matrix):
         print(error)
 
 
-print("Initialisation")
-
-ligne = int(10**3)
-colonne = int(10**3)
-a_matrix = np.arange(0,ligne*colonne,step=1).reshape(ligne,colonne)
-print(a_matrix)
-nrb_max_sval=min(a_matrix.shape)
-
-test_primme(a_matrix,6)
-gc.collect()
-test_numpy(a_matrix)
-gc.collect()
-test_scipy(a_matrix)
-
-
-# if __name__== '__main__':
