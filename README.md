@@ -43,5 +43,11 @@ cd primme
 make python_install
 
 pour utiliser test_paul.py, il faut utiliser line_profiler ou memory_profiler
-comme indiqué sur ce lien
+kernprof -l test_paul.py
+python -m line_profiler test_paul.py.lprof
+
+ou 
+python -m memory_profiler test_paul.py
+
+plus d'info :
 https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
