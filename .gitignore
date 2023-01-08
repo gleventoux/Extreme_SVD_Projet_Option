@@ -1,2 +1,4 @@
 /matrix/*
 !matrix/.gitkeep 
+
+/__pycache__/

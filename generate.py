@@ -32,17 +32,20 @@ def generate(filename,n,m,low=0,high=1,batch_size=1000):
         if high < low:
             low,high = 0, 0
 
-        last_batch_number,last_batch_size = divmod(n,batch_size)
+        full_batch_number, leftover_batch_size = divmod(n,batch_size)
+        batch_number = full_batch_number + int(leftover_batch_size != 0)
+        batch_label = "batch{:0" + str(len(str(batch_number-1))) + "}" 
+        
 
         with h5py.File(file_path,'w') as file:
             
-            for i in range(last_batch_number):
-                batch = file.create_dataset("batch{}".format(i), shape=(batch_size,m))
+            for i in range(full_batch_number):
+                batch = file.create_dataset(batch_label.format(i), shape=(batch_size,m))
                 batch[:] = np.random.uniform(low,high,size=(batch_size,m))
 
-            if last_batch_size != 0:
-                batch = file.create_dataset("batch{}".format(last_batch_number), shape=(last_batch_size,m))
-                batch[:] = np.random.uniform(low,high,size=(last_batch_size,m))
+            if leftover_batch_size != 0:
+                batch = file.create_dataset(batch_label.format(batch_number-1), shape=(leftover_batch_size,m))
+                batch[:] = np.random.uniform(low,high,size=(leftover_batch_size,m))
 
     else:
         print("Filename already used, matrix not generated.")
