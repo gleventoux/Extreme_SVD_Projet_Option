@@ -1,6 +1,8 @@
 import os
 import h5py
 import numpy as np
+import argparse
+
 
 def generate(filename,n,m,low=0,high=1,batch_size=1000):
 
@@ -49,6 +51,21 @@ def generate(filename,n,m,low=0,high=1,batch_size=1000):
 
     else:
         print("Filename already used, matrix not generated.")
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filename",type=str)
+    parser.add_argument("n",type=int)
+    parser.add_argument("m",type=int)
+    parser.add_argument("--low",type=float,required=False,default=0)
+    parser.add_argument("--high",type=float,required=False,default=1)
+    parser.add_argument("--batch_size",type=int,required=False,default=1000)
+
+    args = parser.parse_args()
+
+    generate(args.filename,args.n,args.m,args.low,args.high,args.batch_size)
 
         
             
