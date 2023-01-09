@@ -59,14 +59,19 @@ Datasets
 
 test_paul.py et test_simple_paul.py nécessite d'installer primme à partir des sources
 git clone https://github.com/primme/primme
+
 cd primme
+
 make python_install
 
 pour utiliser test_paul.py, il faut utiliser line_profiler ou memory_profiler
+
 kernprof -l test_paul.py
+
 python -m line_profiler test_paul.py.lprof
 
 ou 
+
 python -m memory_profiler test_paul.py
 
 plus d'info :
