@@ -8,4 +8,4 @@ Before execute test.py:
   
 Then execute with the cmd : python3 -m test (in folder soutenance)
 
-See results with cmd : kernprof -l test.py, then python -m line_profiler test_.py.lprof
+See results with cmd : kernprof -l test.py, then python -m line_profiler test.py.lprof

@@ -3,11 +3,6 @@ from scipy.linalg import svd
 import primme
 import time
 import gc
-import numpy as np
-from scipy.linalg import svd
-import primme
-import time
-import gc
 
 @profile
 def test_primme(matrix,sv_number):

@@ -7,8 +7,6 @@ import h5py
 import os
 
 
-
-
 @profile
 def test_numpy(filename):
 
@@ -62,7 +60,7 @@ def test_scipy(filename):
         print(vh.shape)
 
 @profile
-def test_primme(filename,sv_number):
+def test_primme(filename):
 
     file_path = filename + ".hdf5"
 
@@ -76,6 +74,7 @@ def test_primme(filename,sv_number):
 
         matrix = np.concatenate(batchs)
         sv_number = np.min(matrix.shape)
+        print( "Number of singular values to compute :")
         print(sv_number)
         
         svecs_left, svals, svecs_right = primme.svds(matrix,k = sv_number, tol=1e-9, which='LM')
@@ -145,11 +144,11 @@ def test_sklearn(filename):
 
 # CALL
 
-filename = "petite"
+filename = "moyenne"
 
 test_numpy(filename)
 test_scipy(filename)
-test_primme(filename,6)
+test_primme(filename)
 test_dask(filename)
 test_sklearn(filename)
 
