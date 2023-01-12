@@ -75,6 +75,9 @@ def test_primme(filename,sv_number):
             batchs.append(f[key][:])
 
         matrix = np.concatenate(batchs)
+        sv_number = np.min(matrix.shape)
+        print(sv_number)
+        
         svecs_left, svals, svecs_right = primme.svds(matrix,k = sv_number, tol=1e-9, which='LM')
 
         print("Test PRIMME")
@@ -142,7 +145,7 @@ def test_sklearn(filename):
 
 # CALL
 
-filename = "data_1_10k_100"
+filename = "petite"
 
 test_numpy(filename)
 test_scipy(filename)
