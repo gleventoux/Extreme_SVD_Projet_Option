@@ -144,7 +144,7 @@ def test_sklearn(filename):
 
 # CALL
 
-filename = "moyenne"
+filename = "grande"
 
 test_numpy(filename)
 test_scipy(filename)
