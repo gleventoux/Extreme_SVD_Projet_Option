@@ -4,3 +4,4 @@
 /__pycache__/
 
 /benchmark.py.lprof
+/openmpi-1.10.3/*
