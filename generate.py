@@ -42,11 +42,11 @@ def generate(filename,n,m,low=0,high=1,batch_size=1000):
         with h5py.File(file_path,'w') as file:
             
             for i in range(full_batch_number):
-                batch = file.create_dataset(batch_label.format(i), shape=(batch_size,m))
+                batch = file.create_dataset(batch_label.format(i), shape=(batch_size,m),dtype='float64')
                 batch[:] = np.random.uniform(low,high,size=(batch_size,m))
 
             if leftover_batch_size != 0:
-                batch = file.create_dataset(batch_label.format(batch_number-1), shape=(leftover_batch_size,m))
+                batch = file.create_dataset(batch_label.format(batch_number-1), shape=(leftover_batch_size,m),dtype='float64')
                 batch[:] = np.random.uniform(low,high,size=(leftover_batch_size,m))
 
     else:
