@@ -2,8 +2,8 @@
 !matrix/.gitkeep 
 
 /__pycache__/
+/.ipynb_checkpoints/
 
 /benchmark.py.lprof
 /openmpi-1.10.3/*
 
-/soutenance/grande.hdf5

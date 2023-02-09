@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Ce repo comporte tout notre code produit dans le cadre de notre projet d'option visant établir un benchmark de méthodes SVD out-of-core implémantées en Python.
+Ce repo comporte tout notre code produit dans le cadre de notre projet d'option visant établir un benchmark de méthodes SVD out-of-core implémentées en Python.
 
 ## Génération de matrices aléatoires
 
-Pour générer une matrice de réels aléatoires, ouvrir un terminal à la racine du projet et éxécuter la commande suivante :
+Pour générer une matrice de réels aléatoires, ouvrir un terminal à la racine du projet et exécuter la commande suivante :
 
 ```
 python3 -m generate --low=<LOW> --high=<HIGH> --batch_size=<BATCH_SIZE> <FILENAME> <N> <M>
@@ -17,8 +17,8 @@ Arguments requis:
 - M (int): Nombre de colonnes
 
 Arguments optionels:
-- LOW (float, default=0) : Borne inf pour les coéfficients
-- HIGH (float, default=1) : Borne sup pour les coéfficients
+- LOW (float, default=0) : Borne inf pour les coefficients
+- HIGH (float, default=1) : Borne sup pour les coefficients
 - BATCH_SIZE (int, defaulft=1000) : Taille des batchs 
 
 La matrice est générée dans le répertoire ```matrix``` sous la forme d'un fichier d'extension .hdf5. Si le nom de fichier est déjà utilisé, la matrice n'est pas générée.
