@@ -1,6 +1,9 @@
 /matrix/*
 !matrix/.gitkeep 
 
+/decompostion_results/*
+!decompostion_results/.gitkeep 
+
 /__pycache__/
 /.ipynb_checkpoints/
 

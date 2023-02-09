@@ -1,5 +1,21 @@
 # Import
 
+def decompostion_cleaner(decomposition_dir):
+    """
+    Delete the result of an svd decomposition stored in decomposition_dir
+
+    Parameters
+    ----------
+    decomposition_dir : str
+        the path to the directory where the decomposition is stored as matrixes in hdr5 format
+
+    Returns
+    -------
+    None 
+        Side effect of deleting the files in decomposition_dir
+
+    """
+
 def timer(svd_func, matrix_filename, run_nbr=5):
     """
     Perform a timeit benchmark on a svd decomposition function 
@@ -29,21 +45,7 @@ def timer(svd_func, matrix_filename, run_nbr=5):
     """
     pass
 
-def decompostion_cleaner(decomposition_dir):
-    """
-    Delete the result of an svd decomposition stored in decomposition_dir
 
-    Parameters
-    ----------
-    decomposition_dir : str
-        the path to the directory where the decomposition is stored as matrixes in hdr5 format
-
-    Returns
-    -------
-    None 
-        Side effect of deleting the files in decomposition_dir
-
-    """
 
 def results_storer(results, results_file):
     """
