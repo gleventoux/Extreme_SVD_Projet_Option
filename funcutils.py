@@ -2,8 +2,11 @@
 
 def timer(svd_func, matrix_filename, run_nbr=5):
     """
-    Perform a timeit benchmark on an svd decomposition function 
+    Perform a timeit benchmark on a svd decomposition function 
     on a matrix stored at matrix_filename with run_nbr number of runs
+
+    TODO Don't forget to clean the results of  svd_func
+
 
     Parameters
     ----------
@@ -18,13 +21,29 @@ def timer(svd_func, matrix_filename, run_nbr=5):
     -------
     result : dict
         a dictionnary of a singular key : value pair defined as
-            key = (svd_fun_name, matrix_name)
+            key = (svd_fun_name, matrix_name) : tuple
                 svd_fun_name : str
                 matrix_name : str
             value = averaged benchmark time in s : float
 
     """
     pass
+
+def decompostion_cleaner(decomposition_dir):
+    """
+    Delete the result of an svd decomposition stored in decomposition_dir
+
+    Parameters
+    ----------
+    decomposition_dir : str
+        the path to the directory where the decomposition is stored as matrixes in hdr5 format
+
+    Returns
+    -------
+    None 
+        Side effect of deleting the files in decomposition_dir
+
+    """
 
 def results_storer(results, results_file):
     """
@@ -34,12 +53,13 @@ def results_storer(results, results_file):
     Create such file if it does not already exist
 
     TODO define the columns names for an header at line 0
+    
 
     Parameters
     ----------
     results : dict
         a dictionnary defined as { key : value } and 
-            key = (svd_fun_name, matrix_name)
+            key = (svd_fun_name, matrix_name) : tuple
                 svd_fun_name : str
                 matrix_name : str
             value = averaged benchmark time in s : float
