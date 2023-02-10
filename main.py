@@ -17,6 +17,7 @@ for matrix in matrix_list :
     # TODO for each svd_decomposition function, write the following line 
     results = funcutils.timer(svd_func.svd_func_template,matrix,run_nbr = NUMBER_OF_RUNS)
     benchmark_results.update(results)
+    gc.collect()
 
 funcutils.results_storer(benchmark_results,'benchmark_results.csv')
 
