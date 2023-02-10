@@ -27,7 +27,7 @@ def timer(svd_func, matrix_filename, run_nbr=5):
     Parameters
     ----------
     svd_func : func
-        the svd decomposition function, which only argument is 
+        the svd decomposition function, imported from svd_func.py
     matrix_filename : str
         the path to the stored matrix in hdr5 format
     run_nbr : int, optional
