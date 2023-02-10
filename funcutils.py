@@ -43,7 +43,7 @@ def timer(svd_func, matrix_filename, run_nbr=5):
             value = averaged benchmark time in s : float
 
     """
-    pass
+    
 
 
 
@@ -75,4 +75,4 @@ def results_storer(results, results_file):
         Side effect of writing a .csv file
 
     """
-    pass
+    

@@ -23,4 +23,4 @@ def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
         in the directory at decomposition_dir in an hdr5 format
 
     """
-    pass
+    
