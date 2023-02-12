@@ -53,8 +53,7 @@ def generate(filename,n,m,low=0,high=1,batch_size=1000):
         print("Filename already used, matrix not generated.")
 
 
-if __name__ == "__main__":
-
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("filename",type=str)
     parser.add_argument("n",type=int)
@@ -66,6 +65,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     generate(args.filename,args.n,args.m,args.low,args.high,args.batch_size)
+    
+if __name__ == "__main__":
+    main()
+
+
 
         
             
