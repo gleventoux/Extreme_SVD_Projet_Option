@@ -44,9 +44,6 @@ def timer(svd_func, matrix_filename, run_nbr=5):
 
     """
     
-
-
-
 def results_storer(results, results_file):
     """
     Write the content of results in a .csv file with the first column designing the svd method,
@@ -75,4 +72,4 @@ def results_storer(results, results_file):
         Side effect of writing a .csv file
 
     """
-    
+

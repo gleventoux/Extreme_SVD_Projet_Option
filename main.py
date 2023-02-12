@@ -6,11 +6,11 @@ import gc
 
 
 # Matrix list definition
-matrix_list = [] # list of string, each being the name of the file associated with an matrix, extension included
+matrix_list = ['random1Go.hdf5'] # list of string, each being the name of the file associated with an matrix, extension included
 
-path_to_matrix_dir = '/matrix/' # Assume linux system path
+path_to_matrix_dir = './matrix/' # Assume linux system path
 
-matrix_list_with_dir = [ path_to_matrix_dir + matrix for matrix in matrix_list]
+matrix_list_with_dir = [path_to_matrix_dir + matrix for matrix in matrix_list]
 
 # Initialisation of global varaible and constants
 benchmark_results = {}

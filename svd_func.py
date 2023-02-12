@@ -1,6 +1,5 @@
 # Import
 
-
 def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
     """
     Perform a svd decomposition on a matrix stored at matrix_filename 
@@ -8,10 +7,10 @@ def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
     Parameters
     ----------
     matrix_filename : str
-        the path to the stored matrix in hdr5 format
+        the path to the stored matrix in hdf5 format
     decomposition_dir : str
         path to the directory, where the singular values and right and left singular vecors are stored
-        in hdr5 format
+        in hdf5 format
     vectors : bool, optional
         Boolean enabling the return of the right and left singular vectors
         (default is True)
