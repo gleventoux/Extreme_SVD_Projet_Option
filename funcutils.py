@@ -16,6 +16,7 @@ def decompostion_cleaner(decomposition_dir):
 
     """
 
+
 def timer(svd_func, matrix_filename, run_nbr=5):
     """
     Perform a timeit benchmark on a svd decomposition function 
