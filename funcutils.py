@@ -1,4 +1,7 @@
 # Import
+import numpy as np
+import h5py
+import os
 
 def decompostion_cleaner(decomposition_dir):
     """
@@ -76,4 +79,16 @@ def results_storer(results, results_file):
         Side effect of writing a .csv file
 
     """
+
+def hdf5_to_memmap(matrixname,rows,columns):
+
+    filename = os.path.splitext(matrixname)[0]
+    target_memmap = np.memmap(filename+'.dat', dtype='float64',mode = 'w+',shape = (rows,columns))
+    
+    with h5py.File(matrixname,"r") as f:
+
+        for (i,batch) in enumerate(f.keys()):
+            batch_size= f[batch].shape[0]
+            target_memmap[i:i+batch_size] = f[batch][:]
+            target_memmap.flush()
     
