@@ -3,8 +3,6 @@ import funcutils
 import svd_func
 import gc
 
-
-
 # Matrix list definition
 matrix_list = ['random1Go.hdf5'] # list of string, each being the name of the file associated with an matrix, extension included
 

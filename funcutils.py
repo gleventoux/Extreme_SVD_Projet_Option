@@ -1,4 +1,6 @@
 # Import
+import numpy as np
+import h5py 
 
 def decompostion_cleaner(decomposition_dir):
     """
@@ -72,4 +74,6 @@ def results_storer(results, results_file):
         Side effect of writing a .csv file
 
     """
+
+
 

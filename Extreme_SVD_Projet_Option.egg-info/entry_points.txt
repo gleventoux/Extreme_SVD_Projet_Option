@@ -1,0 +1,2 @@
+[console_scripts]
+generate = generate.__main__:main
