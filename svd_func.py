@@ -57,6 +57,20 @@ def svd_numpy_naive(matrix_filename,rows,columns,decomposition_dir,vectors = Tru
     """
 
     k = min(rows,columns)
+    outputname = decomposition_dir+'SVD_numpy_'
+    #TODO gérer les problèmes de path
+
+    a = np.memmap(matrix_filename,dtype = 'float64',mode = 'w+',shape = (rows,columns))
+    s = np.memmap(outputname+'S.dat',dtype = 'float64',mode = 'w+',shape = k)
+    if vectors:
+        u = np.memmap(outputname+'U.dat',dtype = 'float64',mode = 'w+',shape = (rows,k))
+        v = np.memmap(outputname+'V.dat',dtype = 'float64',mode = 'w+',shape = (k,columns))
+        u[:],s[:],v[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors) 
+        u.flush()
+        v.flush()
+    else :
+        s[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors) 
+    s.flush()
     
 
     
