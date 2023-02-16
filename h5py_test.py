@@ -20,6 +20,7 @@ with h5py.File('./matrix/random1Go.hdf5', 'r') as f:
     print(isinstance(f,h5py.File))
     print_structure(f)
     root_keys = list(f.keys())
+    print(root_keys)
     print("Total datasets in root group: ", len([key for key in root_keys if isinstance(f[key], h5py.Dataset)]))
     other_keys = [key for key in root_keys if isinstance(f[key], h5py.Group)]
     for key in other_keys:

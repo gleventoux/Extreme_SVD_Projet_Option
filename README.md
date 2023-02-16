@@ -3,6 +3,10 @@
 ## Introduction
 
 Ce repo comporte tout notre code produit dans le cadre de notre projet d'option visant établir un benchmark de méthodes SVD out-of-core implémentées en Python.
+```
+python setup.py install
+```
+
 
 ## Génération de matrices aléatoires
 
@@ -74,3 +78,8 @@ python -m memory_profiler benchmark.py
 
 plus d'info :
 https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
+
+pour tester le code parallel
+```
+python3 test_parallel.py
+```
