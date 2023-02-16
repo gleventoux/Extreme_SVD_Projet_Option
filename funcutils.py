@@ -83,6 +83,7 @@ def results_storer(results, results_file):
 def hdf5_to_memmap(matrixname,rows,columns):
 
     filename = os.path.splitext(matrixname)[0]
+    # TODO gérer les problèmes de path quand on est pas dans le répertoire courant
     target_memmap = np.memmap(filename+'.dat', dtype='float64',mode = 'w+',shape = (rows,columns))
     
     with h5py.File(matrixname,"r") as f:
