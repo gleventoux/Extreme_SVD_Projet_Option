@@ -13,7 +13,7 @@ matrix_list = [] # list of string, each being the name of the file associated wi
 benchmark_results = {}
 NUMBER_OF_RUNS = 3
 
-for matrix in matrix_list_with_dir :
+for matrix in matrix_list :
     
     matrix = os.path.join("matrix",matrix) # path to matrix file
     
