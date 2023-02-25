@@ -2,6 +2,7 @@
 import numpy as np
 import h5py
 import os
+import csv
 
 def decompostion_cleaner(decomposition_dir):
     """
@@ -85,6 +86,15 @@ def results_storer(results, results_file):
         Side effect of writing a .csv file
 
     """
+
+    with open(results_file, 'w', newline='') as csvfile:
+        fieldnames = ['function', 'matrix', 'time'] # columns names in the .csv file
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader() # write columns names
+        for key in results.keys():
+            function, matrix, time = key[0], key[1], results[key]
+            writer.writerow({'function': function, 'matrix': matrix, 'time': time}) # fill .csv file
+        
 
 def hdf5_to_memmap(matrixname,rows,columns):
 
