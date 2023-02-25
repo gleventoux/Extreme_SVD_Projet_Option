@@ -18,6 +18,12 @@ def decompostion_cleaner(decomposition_dir):
         Side effect of deleting the files in decomposition_dir
 
     """
+    
+    files = os.listdir(decomposition_dir) # files in decomposition_dir
+    files.remove(".gitkeep") # we want delete all files execpt .gitkeep
+    for file in files:
+        file_path = os.path.join(decomposition_dir,file) # file path
+        os.remove(file_path) # remove file
 
 
 def timer(svd_func, matrix_filename, run_nbr=5):
