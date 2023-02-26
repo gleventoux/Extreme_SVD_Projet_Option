@@ -4,16 +4,14 @@ import numpy as np
 import argparse
 
 
-def generate(filename,n,m,low=0,high=1,batch_size=1000):
-
-    '''
-
+def generate_random(filename,n,m,low=0,high=1,batch_size=1000):
+    """
     # TODO : Brief description of the function
 
     Parameters
     ----------
     filename : str
-               Name of the .hdf5 file which will store the matrix
+               Name of the .hdf5 file which will store the matrix (without extension)
     n : int
         Number of rows
     m : int
@@ -25,7 +23,7 @@ def generate(filename,n,m,low=0,high=1,batch_size=1000):
     batch_size : int, optional
                  # TODO : description of batch_size
           
-    '''
+    """
     
     file_path = os.path.join("matrix",filename) + ".hdf5"
     
@@ -53,20 +51,48 @@ def generate(filename,n,m,low=0,high=1,batch_size=1000):
         print("Filename already used, matrix not generated.")
 
 
-if __name__ == "__main__":
+def generate_random_wrapper(args):
+    """
+    Wrapper of the generate_random function called 
+    when cli user chose matrix type = random
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("filename",type=str)
-    parser.add_argument("n",type=int)
-    parser.add_argument("m",type=int)
-    parser.add_argument("--low",type=float,required=False,default=0)
-    parser.add_argument("--high",type=float,required=False,default=1)
-    parser.add_argument("--batch_size",type=int,required=False,default=1000)
+    Parameters
+    ==========
+    args : argparse.Namespace
+        Struct whose attributs are the parameters of the generate_random function 
+
+    """
+
+    generate_random(args.filename,args.n,args.m,args.low,args.high,args.batch_size)
+
+
+def main():
+
+    parser = argparse.ArgumentParser(description="Generate matrix to test SVD methods.")
+
+    # We define subparsers for all type of matrix.
+    subparsers = parser.add_subparsers(description="Choose matrix type.")
+
+    # Definition for random matrix
+    parser_random = subparsers.add_parser("random",help="Random matrix whis entries uniformely taken in [low,high].")
+
+    parser_random.add_argument("filename",type=str)
+    parser_random.add_argument("n",type=int)
+    parser_random.add_argument("m",type=int)
+    parser_random.add_argument("--low",type=float,required=False,default=0)
+    parser_random.add_argument("--high",type=float,required=False,default=1)
+    parser_random.add_argument("--batch_size",type=int,required=False,default=1000)
+
+    parser_random.set_defaults(func=generate_random_wrapper)
 
     args = parser.parse_args()
+    args.func(args)
 
-    generate(args.filename,args.n,args.m,args.low,args.high,args.batch_size)
 
+if __name__ == "__main__":
+    main()
+
+    
         
             
 
