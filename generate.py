@@ -63,25 +63,25 @@ def generate_random_wrapper(args):
 
     """
 
-    generate_random(args.filename,args.n,args.m,args.low,args.high,args.batch_size)
+    generate_random(args.filename,args.n,args.m,args.low,args.high,args.bsize)
 
 
 def main():
 
-    parser = argparse.ArgumentParser(description="Generate matrix to test SVD methods.")
+    parser = argparse.ArgumentParser(description="Generate matrix to test SVD methods")
 
     # We define subparsers for all type of matrix.
     subparsers = parser.add_subparsers(description="Choose matrix type.")
 
     # Definition for random matrix
-    parser_random = subparsers.add_parser("random",help="Random matrix whis entries uniformely taken in [low,high].")
+    parser_random = subparsers.add_parser("random",description="Generate random matrix")
 
-    parser_random.add_argument("filename",type=str)
-    parser_random.add_argument("n",type=int)
-    parser_random.add_argument("m",type=int)
-    parser_random.add_argument("--low",type=float,required=False,default=0)
-    parser_random.add_argument("--high",type=float,required=False,default=1)
-    parser_random.add_argument("--batch_size",type=int,required=False,default=1000)
+    parser_random.add_argument("filename",type=str, help="filename without extension")
+    parser_random.add_argument("n",type=int,help="number of rows")
+    parser_random.add_argument("m",type=int,help="number of columns")
+    parser_random.add_argument("--low",type=float,required=False,default=0,help="lower bound for matrix entries")
+    parser_random.add_argument("--high",type=float,required=False,default=1,help="upper bound for matrix entries")
+    parser_random.add_argument("--bsize",type=int,required=False,default=1000,help="batch number of rows")
 
     parser_random.set_defaults(func=generate_random_wrapper)
 
