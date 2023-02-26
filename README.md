@@ -4,25 +4,28 @@
 
 Ce repo comporte tout notre code produit dans le cadre de notre projet d'option visant établir un benchmark de méthodes SVD out-of-core implémentées en Python.
 
-## Génération de matrices aléatoires
+## Génération de matrices
 
-Pour générer une matrice de réels aléatoires, ouvrir un terminal à la racine du projet et exécuter la commande suivante :
+Afin de tester nos méthodes de SVD, nous avons conçu une CLI permettant de générer des matrices de plusieurs types : aléatoire, physique, svd-connu.
+
+La CLI doit être utilisée depuis la racine du projet. Les matrices sont générées au format .hdf5 dans le sous-répertoire ```matrix```.
+
+### Matrices aléatoires
+
+Pour générer une matrice de réels aléatoires dont les coéfficients sont tirés uniformément dans un intervalle, exécuter la commande suivante :
 
 ```
-python3 -m generate --low=<LOW> --high=<HIGH> --batch_size=<BATCH_SIZE> <FILENAME> <N> <M>
+python3 -m generate random <FILENAME> <N> <M> --low=<LOW> --high=<HIGH> --bsize=<BSIZE> 
 ```
 Arguments requis:
-- FILENAME (str): Nom de la matrice
-- N (int): Nombre de lignes
-- M (int): Nombre de colonnes
+- FILENAME (str) : nom du fichier sans extension
+- N (int) : nombre de lignes
+- M (int) : nombre de colonnes
 
 Arguments optionels:
 - LOW (float, default=0) : Borne inf pour les coefficients
 - HIGH (float, default=1) : Borne sup pour les coefficients
-- BATCH_SIZE (int, defaulft=1000) : Taille des batchs 
-
-La matrice est générée dans le répertoire ```matrix``` sous la forme d'un fichier d'extension .hdf5. Si le nom de fichier est déjà utilisé, la matrice n'est pas générée.
-
+- BSIZE (int, defaulft=1000) : Taille des batchs 
 
 ## TODO 
 
