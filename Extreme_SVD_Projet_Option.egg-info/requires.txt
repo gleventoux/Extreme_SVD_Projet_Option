@@ -1,6 +1,0 @@
-numpy
-matplotlib
-h5py
-sklearn
-mpi4py
-netCDF4
