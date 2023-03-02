@@ -3,6 +3,8 @@ import numpy as np
 import h5py
 import os
 import csv
+import timeit
+
 
 def decompostion_cleaner(decomposition_dir):
     """
@@ -27,7 +29,7 @@ def decompostion_cleaner(decomposition_dir):
         os.remove(file_path) # remove file
 
 
-def timer(svd_func, matrix_filename, run_nbr=5):
+def timer(svd_func,matrix_filename,loader,decomposition_dir, run_nbr=5):
     """
     Perform a timeit benchmark on a svd decomposition function 
     on a matrix stored at matrix_filename with run_nbr number of runs
@@ -41,6 +43,11 @@ def timer(svd_func, matrix_filename, run_nbr=5):
         the svd decomposition function, imported from svd_func.py
     matrix_filename : str
         the path to the stored matrix in hdr5 format
+    TODO not sure how to handle different loading ways.
+    loader : func
+        different functions to load matrices differently from hdf5 files which use matrix_filename to return a numpy array for calculations.
+    decomposition_dir : str
+        the path to the directory where the decomposition is stored as matrixes in hdr5 format
     run_nbr : int, optional
         Number of time timeit performs the benchmark (default is 5)
 
@@ -53,7 +60,14 @@ def timer(svd_func, matrix_filename, run_nbr=5):
                 matrix_name : str
             value = averaged benchmark time in s : float
 
-    """
+    """    
+    # timeit 
+    times = timeit.repeat(lambda: svd_func(matrix_filename), repeat=run_nbr, number=1)
+    avg_time = sum(times) / run_nbr
+    # Clean up
+    decompostion_cleaner(decomposition_dir=decomposition_dir)
+    result = { (svd_func.__name__, matrix_filename): avg_time }
+    return result
     
 def results_storer(results, results_file):
     """

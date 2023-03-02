@@ -14,5 +14,6 @@ interpreter_help.ipynb
 /build/*
 /dist/*
 /Extreme_SVD_Projet_Option.egg-info/*
+/tests/*
 
 
