@@ -6,6 +6,7 @@
 
 /__pycache__/
 /.ipynb_checkpoints/
+interpreter_help.ipynb
 
 /benchmark.py.lprof
 /openmpi-1.10.3/*

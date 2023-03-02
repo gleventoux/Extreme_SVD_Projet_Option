@@ -1,6 +1,8 @@
 # Import
 import numpy as np
-import h5py 
+import h5py
+import os
+import csv
 
 def decompostion_cleaner(decomposition_dir):
     """
@@ -17,6 +19,13 @@ def decompostion_cleaner(decomposition_dir):
         Side effect of deleting the files in decomposition_dir
 
     """
+    
+    files = os.listdir(decomposition_dir) # files in decomposition_dir
+    files.remove(".gitkeep") # we want delete all files execpt .gitkeep
+    for file in files:
+        file_path = os.path.join(decomposition_dir,file) # file path
+        os.remove(file_path) # remove file
+
 
 def timer(svd_func, matrix_filename, run_nbr=5):
     """
@@ -75,5 +84,25 @@ def results_storer(results, results_file):
 
     """
 
+    with open(results_file, 'w', newline='') as csvfile:
+        fieldnames = ['function', 'matrix', 'time'] # columns names in the .csv file
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader() # write columns names
+        for key in results.keys():
+            function, matrix, time = key[0], key[1], results[key]
+            writer.writerow({'function': function, 'matrix': matrix, 'time': time}) # fill .csv file
+        
 
+def hdf5_to_memmap(matrixname,rows,columns):
 
+    filename = os.path.splitext(matrixname)[0]
+    # TODO gérer les problèmes de path quand on est pas dans le répertoire courant
+    target_memmap = np.memmap(filename+'.dat', dtype='float64',mode = 'w+',shape = (rows,columns))
+    
+    with h5py.File(matrixname,"r") as f:
+
+        for (i,batch) in enumerate(f.keys()):
+            batch_size= f[batch].shape[0]
+            target_memmap[i:i+batch_size] = f[batch][:]
+            target_memmap.flush()
+    

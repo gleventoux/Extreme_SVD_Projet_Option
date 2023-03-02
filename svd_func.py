@@ -42,6 +42,9 @@ def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
     None
         Side effect of writing the singular values and right and left singular vecors 
         in the directory at decomposition_dir in an hdr5 format
+        Naming convention : - SVD_Method_Matrix_Name_U : Left Singular Vectors
+                            - SVD_Method_Matrix_Name_S : Singular Values (1D Vector if possible)
+                            - SVD_Method_Matrix_Name_V : Right Singular Vectors
 
 
    """
