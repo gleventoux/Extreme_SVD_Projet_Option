@@ -4,10 +4,8 @@ import svd_func
 import gc
 import os
 
-
-
 # Matrix list definition
-matrix_list = [] # list of string, each being the name of the file associated with an matrix, extension included
+matrix_list = ['random1Go.hdf5'] # list of string, each being the name of the file associated with an matrix, extension included
 
 # Initialisation of global varaible and constants
 benchmark_results = {}

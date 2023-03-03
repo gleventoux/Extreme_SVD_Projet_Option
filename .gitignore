@@ -11,3 +11,9 @@ interpreter_help.ipynb
 /benchmark.py.lprof
 /openmpi-1.10.3/*
 
+/build/*
+/dist/*
+/Extreme_SVD_Projet_Option.egg-info/*
+/tests/*
+
+

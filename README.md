@@ -1,8 +1,14 @@
+
+
 # Extreme_SVD_Projet_Option
 
 ## Introduction
 
 Ce repo comporte tout notre code produit dans le cadre de notre projet d'option visant établir un benchmark de méthodes SVD out-of-core implémentées en Python.
+```
+python setup.py install
+```
+
 
 ## Génération de matrices
 
@@ -77,3 +83,37 @@ python -m memory_profiler benchmark.py
 
 plus d'info :
 https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
+
+
+
+pour installer le h5py avec parallèle acceleration, c'est plus vite de reinstall h5py
+
+```bash
+conda unstall h5py
+```
+
+```bash
+conda install -c conda-forge "h5py>=2.9=mpi*"
+```
+
+et vérifier l'installation:
+
+```bash
+$ which mpirun
+/anaconda/envs/env_name/bin/mpirun
+```
+
+
+
+pour tester le code parallel
+
+```
+python3 test_parallel.py
+```
+
+ou
+
+```bash
+mpirun -np 4 python3 svd_func.py
+```
+
