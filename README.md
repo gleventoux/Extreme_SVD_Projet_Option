@@ -33,6 +33,23 @@ Arguments optionels:
 - HIGH (float, default=1) : Borne sup pour les coefficients
 - BSIZE (int, defaulft=1000) : Taille des batchs 
 
+### Matrices aléatoires avec SVD
+
+Pour générer une matrice aléatoire ainsi que sa décomposition SVD, exécuter la commande suivante :
+
+```
+python3 -m generate svd_known <FILENAME> <N> <M> --low=<LOW> --high=<HIGH> --bsize=<BSIZE> 
+```
+Arguments requis:
+- FILENAME (str) : nom du fichier sans extension
+- N (int) : nombre de lignes
+- M (int) : nombre de colonnes
+
+Arguments optionels:
+- LOW (float, default=0) : Borne inf pour les coefficients
+- HIGH (float, default=1) : Borne sup pour les coefficients
+- BSIZE (int, defaulft=1000) : Taille des batchs 
+
 ## TODO 
 
 Scikit learn
