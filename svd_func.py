@@ -64,7 +64,7 @@ def load_h5_serial(filename,datasetname):
     """    
     h5_file = h5py.File(filename, 'r')
     dataset = h5_file[datasetname]
-    dataset=dataset[:,:].reshape(dataset.shape[0],-1)
+    dataset = dataset[:,:].reshape(dataset.shape[0],-1)
     h5_file.close()
     return dataset
 
