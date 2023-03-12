@@ -103,7 +103,7 @@ https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
 
 
 
-pour installer le h5py avec parallèle acceleration, c'est plus vite de reinstall h5py
+pour installer le h5py avec parallèle acceleration, c'est plus rapide de reinstaller h5py
 
 ```bash
 conda unstall h5py
@@ -131,6 +131,6 @@ python3 test_parallel.py
 ou
 
 ```bash
-mpirun -np 4 python3 svd_func.py
+mpirun -np 4 python3 xin_svd_func.py
 ```
 

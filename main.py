@@ -1,6 +1,6 @@
 # Import
 import funcutils
-import svd_func
+import xin_svd_func
 import gc
 import os
 
@@ -17,7 +17,7 @@ for matrix in matrix_list :
     
     # TODO for each svd_decomposition function, 
     # write the following line adapted to each decomposition function
-    results = funcutils.timer(svd_func.svd_func_template,matrix,run_nbr = NUMBER_OF_RUNS)
+    results = funcutils.timer(xin_svd_func.svd_func_template,matrix,run_nbr = NUMBER_OF_RUNS)
     benchmark_results.update(results)
     gc.collect()
 
