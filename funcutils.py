@@ -108,8 +108,8 @@ def results_storer(results, results_file):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader() # write columns names
         for key in results.keys():
-            function, matrix, time = key[0], key[1], results[key]
-            writer.writerow({'function': function, 'matrix': matrix, 'time': time}) # fill .csv file
+            func_name, matrix, time = key[0], key[1], results[key]
+            writer.writerow({'function': func_name, 'matrix': matrix, 'time': time}) # fill .csv file
         
 
 def hdf5_to_memmap(matrixname,rows,columns):

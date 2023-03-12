@@ -61,10 +61,10 @@ def svd_numpy_naive(matrix_filename, rows, columns, decomposition_dir ,vectors =
                             - SVD_Method_Matrix_Name_V : Right Singular Vectors
     """
     k = min(rows,columns)
-    outputname =  os.path.join(decomposition_dir,'SVD_numpy_') 
-    #TODO gérer les problèmes de path
+    matrix_name = 'SVD_numpy_'+os.path.split(matrix_filename)[-1].split(".")[0]+"_"
+    outputname =  os.path.join(decomposition_dir,matrix_name) 
 
-    a = np.memmap(matrix_filename,dtype = 'float64',mode = 'w+',shape = (rows,columns))
+    a = np.memmap(matrix_filename,dtype = 'float64',mode = 'c',shape = (rows,columns))
     s = np.memmap(outputname+'S.dat',dtype = 'float64',mode = 'w+',shape = k)
     if vectors:
         u = np.memmap(outputname+'U.dat',dtype = 'float64',mode = 'w+',shape = (rows,k))
@@ -73,5 +73,5 @@ def svd_numpy_naive(matrix_filename, rows, columns, decomposition_dir ,vectors =
         u.flush()
         v.flush()
     else :
-        s[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors) 
+        s[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors)[:]
     s.flush()
