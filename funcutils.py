@@ -108,16 +108,35 @@ def results_storer(results, results_file):
             writer.writerow({'function': func_name, 'matrix': matrix, 'time': time}) # fill .csv file
         
 
-def hdf5_to_memmap(matrixname,rows,columns):
+def hdf5_to_memmap(matrix_name,rows,columns):
+    """
+    Create a copy of a matrix stored in a .hdf5 format as a numpy.memmap stored in a .dat format.
 
-    filename = os.path.splitext(matrixname)[0]
-    # TODO gérer les problèmes de path quand on est pas dans le répertoire courant
-    target_memmap = np.memmap(filename+'.dat', dtype='float64',mode = 'w+',shape = (rows,columns))
+    Parameters
+    ----------
+    matrix_name : str
+        Relative path to the matrix stored in a .hdf5 format
+    rows : int
+        Number of rows of the matrix
+    columns : 
+        Number of columns of the matrix
+
+    Returns
+    -------
+    filename : str
+        Relative path to the .dat file representing the numpy.memmap
     
-    with h5py.File(matrixname,"r") as f:
+    """
+
+    filename = os.path.splitext(matrix_name)[0]+'.dat'
+    
+    target_memmap = np.memmap(filename, dtype='float64',mode = 'w+',shape = (rows,columns))
+    
+    with h5py.File(matrix_name,"r") as f:
 
         for (i,batch) in enumerate(f.keys()):
             batch_size= f[batch].shape[0]
             target_memmap[i:i+batch_size] = f[batch][:]
             target_memmap.flush()
+    return filename
     

@@ -1,7 +1,7 @@
 /matrix/*
 !matrix/.gitkeep 
 
-/decompostion_results/*
+/decomposition_results/*
 !decompostion_results/.gitkeep 
 
 /__pycache__/

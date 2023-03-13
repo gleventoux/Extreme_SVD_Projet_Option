@@ -138,6 +138,46 @@ def pypar_parallel(filenames, results_dir,random=False,K=10,ff=1.0):
         
     if ParSVD.rank == 0:
         ParSVD.save()
+
+def prepare_pypar_parallel(matrix_filename, args, decomposition_dir):
+    """
+    TODO
+    Prepare the matrix in the right form from only 1 hdf5.format to whatever pypar_parallel needs 
+
+    Parameters
+    ----------
+    matrix_filename : str
+        the path to the stored matrix in hdf5 format
+    decomposition_dir : str
+        path to the directory, where the prepared elements could be stored
+    args : 
+       TODO All the arguments you need for the function to work on its own. No need to be a dict (**kwargs)
+
+    Returns
+    -------
+        TODO ???
+    """ 
+
+def prepare_pypar_serial(matrix_filename, args, decomposition_dir):
+    """
+    TODO
+    Prepare the matrix in the right form from only 1 hdf5.format to whatever pypar_serial needs 
+
+    Parameters
+    ----------
+    matrix_filename : str
+        the path to the stored matrix in hdf5 format
+    decomposition_dir : str
+        path to the directory, where the prepared elements could be stored
+    args : 
+       TODO All the arguments you need for the function to work on its own. No need to be a dict (**kwargs)
+
+    Returns
+    -------
+        TODO ???
+    """ 
+
+
     
 if __name__ == '__main__':
     data_list = list()
