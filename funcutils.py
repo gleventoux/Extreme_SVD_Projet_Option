@@ -28,6 +28,27 @@ def decompostion_cleaner(decomposition_dir):
         file_path = os.path.join(decomposition_dir,file) # file path
         os.remove(file_path) # remove file
 
+def dat_cleaner(matrix_dir):
+    """
+    Delete the numpy.memmaps stored in matrix_dir as .dat files
+
+    Parameters
+    ----------
+    matrix_dir : str
+        the relative path to the directory where the the numpy.memmaps stored as .dat files
+    Returns
+    -------
+    None 
+        Side effect of deleting the .dat files in matrix_dir
+
+    """
+    
+    files = os.listdir(matrix_dir) # files in matrix_dir
+    for file in files:
+        if files.split('')[-1]=='dat':
+            file_path = os.path.join(matrix_dir,file) # file path
+            os.remove(file_path) # remove file
+
 
 def timer(svd_func,matrix_filename,kwargs,decomposition_dir, run_nbr=5):
     """

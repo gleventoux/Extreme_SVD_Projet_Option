@@ -1,7 +1,7 @@
 # Import
 import funcutils
 import svd_func
-#import xin_svd_func
+import xin_svd_func
 import os
 
 # Initialisation of global varaible and constants
@@ -27,6 +27,7 @@ for matrix_name in matrix_list[1:] :
     matrix_memmap_filename = funcutils.hdf5_to_memmap(matrix, args_numpy[matrix_name]['rows'],args_numpy[matrix_name]['columns'])
     results = funcutils.timer(svd_func.svd_numpy_naive, matrix_memmap_filename,args_numpy[matrix_name],decomposition_dir,run_nbr = NUMBER_OF_RUNS)
     benchmark_results.update(results)
+    funcutils.dat_cleaner('./matrix/')
 
     # PyParSerial
     prepared_stuff = xin_svd_func.prepare_pypar_serial(matrix, None, decomposition_dir=decomposition_dir)
