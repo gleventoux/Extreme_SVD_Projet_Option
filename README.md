@@ -106,7 +106,7 @@ https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
 pour installer le h5py avec parallèle acceleration, c'est plus rapide de reinstaller h5py
 
 ```bash
-conda unstall h5py
+conda  uninstall h5py
 ```
 
 ```bash
