@@ -71,7 +71,8 @@ def timer(svd_func,matrix_filename,kwargs,decomposition_dir, run_nbr=5, loader =
     avg_time = sum(times) / run_nbr
     # Clean up
     decompostion_cleaner(decomposition_dir=decomposition_dir)
-    result = { (svd_func.__name__, matrix_filename): avg_time }
+    matrix_name = os.path.split(matrix_filename)[-1].split('.')[0]
+    result = { (svd_func.__name__, matrix_name): avg_time }
     return result
     
 def results_storer(results, results_file):

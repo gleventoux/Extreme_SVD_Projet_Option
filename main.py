@@ -11,7 +11,7 @@ decomposition_dir = './decomposition_results/'
 
 # Matrix list definition
 matrix_list = ['random1Go.hdf5'] # list of string, each being the name of the file associated with an matrix, extension included
-args_numpy= {'random1Go.hdf5':{'rows' : 25000, 'columns':100, 'decomposition_dir':decomposition_dir}}
+args_numpy= {'random1Go.hdf5':{'rows' : 25000, 'columns':5000, 'decomposition_dir':decomposition_dir}}
 
 
 for matrix in matrix_list :
