@@ -3,26 +3,26 @@ import os
 import h5py
 import numpy as np
 
-# num_processes = 4 
-# script_file = 'xin_svd_func.py'  
-# cmd_list = ['mpirun', '-np', str(num_processes), 'python3', script_file]
-# result = subprocess.run(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+# # num_processes = 4 
+# # script_file = 'xin_svd_func.py'  
+# # cmd_list = ['mpirun', '-np', str(num_processes), 'python3', script_file]
+# # result = subprocess.run(cmd_list, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-# print(result.stdout.decode('utf-8'))
-# print(result.stderr.decode('utf-8'))
+# # print(result.stdout.decode('utf-8'))
+# # print(result.stderr.decode('utf-8'))
 
-__file__ = "<path_to_file>"
-CWD = os.getcwd()
-CF  = os.path.realpath(__file__)
-CFD = os.path.dirname(CF)
+# __file__ = "<path_to_file>"
+# CWD = os.getcwd()
+# CF  = os.path.realpath(__file__)
+# CFD = os.path.dirname(CF)
 
-# Import library specific modules
-# sys.path.append(os.path.join("./"))
+# # Import library specific modules
+# # sys.path.append(os.path.join("./"))
 from pyparsvd.parsvd_serial   import ParSVD_Serial
 from pyparsvd.parsvd_parallel import ParSVD_Parallel
 
-decomposition_dir=os.path.join(CFD,'decomposition_results')
-Matrix=os.path.join(CFD,"matrix") 
+# decomposition_dir=os.path.join(CFD,'decomposition_results')
+# Matrix=os.path.join(CFD,"matrix") 
 
 
 def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
@@ -53,50 +53,6 @@ def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
    """
     pass
 
-
-def svd_numpy_naive(matrix_filename, rows, columns, decomposition_dir ,vectors = True):
-    """
-    Perform a svd decomposition on a matrix stored at matrix_filename 
-
-    Parameters
-    ----------
-    matrix_filename : str
-        the path to the stored matrix in hdf5 format
-    rows : int 
-        number of rows of the matrix
-    columns : int 
-        number of columns of the matrix
-    decomposition_dir : str
-        path to the directory, where the singular values and right and left singular vecors are stored
-        in hdf5 format
-    vectors : bool, optional
-        Boolean enabling the return of the right and left singular vectors
-        (default is True)
-
-    Returns
-    -------
-    None
-        Side effect of writing the singular values and right and left singular vecors 
-        in the directory at decomposition_dir in an hdr5 format
-        Naming convention : - SVD_Method_Matrix_Name_U : Left Singular Vectors
-                            - SVD_Method_Matrix_Name_S : Singular Values (1D Vector if possible)
-                            - SVD_Method_Matrix_Name_V : Right Singular Vectors
-    """
-    k = min(rows,columns)
-    outputname = decomposition_dir+'SVD_numpy_'
-    #TODO gérer les problèmes de path
-
-    a = np.memmap(matrix_filename,dtype = 'float64',mode = 'w+',shape = (rows,columns))
-    s = np.memmap(outputname+'S.dat',dtype = 'float64',mode = 'w+',shape = k)
-    if vectors:
-        u = np.memmap(outputname+'U.dat',dtype = 'float64',mode = 'w+',shape = (rows,k))
-        v = np.memmap(outputname+'V.dat',dtype = 'float64',mode = 'w+',shape = (k,columns))
-        u[:],s[:],v[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors) 
-        u.flush()
-        v.flush()
-    else :
-        s[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors) 
-    s.flush()
 
 # method for importing data from .h5 files into the forms suitable for pyparsvd serial calculation
 def load_h5_serial(filename,datasetname):
@@ -148,7 +104,7 @@ def load_h5_parallel(filename,comm,rank,nprocs,dataset):
     return rval
 
 # data_list is generated from data_splitter.py data_splitter()
-def pypar_serial(filename, results_dir=decomposition_dir,random=False,K=10,ff=1.0):
+def pypar_serial(filename, results_dir,random=False,K=10,ff=1.0):
     SerSVD = ParSVD_Serial(K=K, ff=ff,low_rank=random,results_dir=results_dir)  
     data_list=filename.copy()  
     data_init=data_list.pop(0)
@@ -164,7 +120,7 @@ def pypar_serial(filename, results_dir=decomposition_dir,random=False,K=10,ff=1.
     SerSVD.save()
     
 # data_list is generated from data_splitter.py data_splitter()
-def pypar_parallel(filenames, results_dir=decomposition_dir,random=False,K=10,ff=1.0):
+def pypar_parallel(filenames, results_dir,random=False,K=10,ff=1.0):
     ParSVD = ParSVD_Parallel(K=K, ff=ff, low_rank=random,results_dir=results_dir)
     data_list=filenames.copy()
     data_init=data_list.pop(0)

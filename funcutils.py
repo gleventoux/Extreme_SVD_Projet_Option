@@ -29,7 +29,7 @@ def decompostion_cleaner(decomposition_dir):
         os.remove(file_path) # remove file
 
 
-def timer(svd_func,matrix_filename,kwargs,decomposition_dir, run_nbr=5, loader = None):
+def timer(svd_func,matrix_filename,kwargs,decomposition_dir, run_nbr=5):
     """
     Perform a timeit benchmark on a svd decomposition function 
     on a matrix stored at matrix_filename with run_nbr number of runs
@@ -42,13 +42,8 @@ def timer(svd_func,matrix_filename,kwargs,decomposition_dir, run_nbr=5, loader =
     svd_func : func
         the svd decomposition function, imported from svd_func.py
     matrix_filename : str
-        the path to the stored matrix in hdf5 format
+        the path to the stored matrix in an approriate format for svd_func
     kwargs = arguments of svd_function as a dictionnary 
-    TODO not sure how to handle different loading ways.
-    loader : func, optional
-        different functions to load matrices differently from hdf5 files 
-        which use matrix_filename to return a numpy array for calculations.
-        Default is None
     decomposition_dir : str
         the path to the directory where the decomposition is stored as matrixes in hdf5 format
     run_nbr : int, optional
