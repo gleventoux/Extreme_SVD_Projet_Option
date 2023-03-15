@@ -11,7 +11,7 @@ python setup.py install
 
 ## Dépendances
 
--[Scikit learn](https://scikit-learn.org/stable/index.html)
+- [Scikit learn](https://scikit-learn.org/stable/index.html)
 ```
 conda install scikit-learn
 ```
