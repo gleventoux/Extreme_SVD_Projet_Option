@@ -41,5 +41,9 @@ for matrix_name in matrix_list[1:] :
     benchmark_results.update(results)
     del prepared_stuff
 
+    # Dask
+    results = funcutils.timer(svd_func.svd_dask, matrix, None, decomposition_dir)
+    benchmark_results.update(results)
+    
 funcutils.results_storer(benchmark_results,'benchmark_results.csv')
 
