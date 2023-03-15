@@ -45,7 +45,7 @@ def dat_cleaner(matrix_dir):
     
     files = os.listdir(matrix_dir) # files in matrix_dir
     for file in files:
-        if files.split('')[-1]=='dat':
+        if file.split('.')[-1]=='dat':
             file_path = os.path.join(matrix_dir,file) # file path
             os.remove(file_path) # remove file
 
