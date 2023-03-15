@@ -9,6 +9,12 @@ Ce repo comporte tout notre code produit dans le cadre de notre projet d'option 
 python setup.py install
 ```
 
+## Dépendances
+
+- [Dask](https://www.dask.org/)
+```
+conda install dask
+```
 
 ## Génération de matrices
 
@@ -23,12 +29,12 @@ Pour générer une matrice de réels aléatoires dont les coéfficients sont tir
 ```
 python3 -m generate random <FILENAME> <N> <M> --low=<LOW> --high=<HIGH> --bsize=<BSIZE> 
 ```
-Arguments requis:
+Arguments positionnels:
 - FILENAME (str) : nom du fichier sans extension
 - N (int) : nombre de lignes
 - M (int) : nombre de colonnes
 
-Arguments optionels:
+Arguments optionnels:
 - LOW (float, default=0) : Borne inf pour les coefficients
 - HIGH (float, default=1) : Borne sup pour les coefficients
 - BSIZE (int, defaulft=1000) : Taille des batchs 
@@ -38,17 +44,21 @@ Arguments optionels:
 Pour générer une matrice aléatoire ainsi que sa décomposition SVD, exécuter la commande suivante :
 
 ```
-python3 -m generate svd_known <FILENAME> <N> <M> --low=<LOW> --high=<HIGH> --bsize=<BSIZE> 
+python3 -m generate svd_known <N> <M> --filename=<FILENAME> --low=<LOW> --high=<HIGH> --bsize=<BSIZE> 
 ```
-Arguments requis:
-- FILENAME (str) : nom du fichier sans extension
+Arguments positionnels:
 - N (int) : nombre de lignes
 - M (int) : nombre de colonnes
 
-Arguments optionels:
+Arguments optionnels:
+- FILENAME (str) : nom du fichier sans extension
 - LOW (float, default=0) : Borne inf pour les coefficients
 - HIGH (float, default=1) : Borne sup pour les coefficients
-- BSIZE (int, defaulft=1000) : Taille des batchs 
+- BSIZE (int, defaulft=1000) : Taille des batchs
+
+Après exécution de cette commande, apparaît dans le répertoire ```matrix/``` les deux fichiers suivants:
+- ```filename.hdf5``` : stock la matrice aléatoire découpée en batch (un dataset = un batch)
+- ```filenameSVD.hdf5``` : stock la SVD de la matrice. Quatre datasets sont définis : U, S, V, M. 
 
 ## TODO 
 
@@ -103,10 +113,10 @@ https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
 
 
 
-pour installer le h5py avec parallèle acceleration, c'est plus rapide de reinstaller h5py
+pour installer le h5py avec parallèle acceleration, c'est plus vite de reinstall h5py
 
 ```bash
-conda  uninstall h5py
+conda unstall h5py
 ```
 
 ```bash
@@ -131,6 +141,6 @@ python3 test_parallel.py
 ou
 
 ```bash
-mpirun -np 4 python3 xin_svd_func.py
+mpirun -np 4 python3 svd_func.py
 ```
 
