@@ -2,6 +2,7 @@
 import os
 import h5py
 import numpy as np
+import dask.array as da
 
 def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
     """
@@ -75,3 +76,55 @@ def svd_numpy_naive(matrix_filename, rows, columns, decomposition_dir ,vectors =
     else :
         s[:] = np.linalg.svd(a,full_matrices=False, compute_uv=vectors)[:]
     s.flush()
+
+
+    def svd_dask(matrix_filename, decomposition_dir, vectors = True):
+        """
+        Perform a svd decomposition on a matrix stored at matrix_filename 
+
+        Parameters
+        ----------
+        matrix_filename : str
+            the path to the stored matrix in hdf5 format
+        decomposition_dir : str
+            path to the directory, where the singular values and right and left singular vecors are stored
+            in hdf5 format
+        vectors : bool, optional
+            Boolean enabling the return of the right and left singular vectors
+            (default is True)
+
+        Returns
+        -------
+        None
+            Side effect of writing the singular values and right and left singular vecors 
+            in the directory at decomposition_dir in an hdr5 format
+            Naming convention : - SVD_Method_Matrix_Name_U : Left Singular Vectors
+                                - SVD_Method_Matrix_Name_S : Singular Values (1D Vector if possible)
+                                - SVD_Method_Matrix_Name_V : Right Singular Vectors
+        """
+        with h5py.File(matrix_filename, "r") as f:
+
+            # get matrix name
+            matrix_name = os.path.splitext(os.path.basename(matrix_filename))[0]
+
+            # template for save files
+            save_file_path_template = os.path.join(decomposition_dir,"SVD_Dask_" + matrix_name + "_{}.h5py")
+
+            da_batch_list = [da.from_array(f[batch]) for batch in f.keys()]
+            da_matrix = da.concatenate(da_batch_list)
+            da_matrix = da.rechunk(da_matrix)
+            
+            # call the svd of dask
+            u,s,v = da.linalg.svd(da_matrix)
+
+            # compute singular values and save them
+            s.compute()
+            s.da.to_hdf5(save_file_path_template.format("S"),"s",s)
+
+            if vectors:
+
+                # compute and save left/right vectors
+                u.compute()
+                v.compute()
+                u.da.to_hdf5(save_file_path_template.format("U"),"u",u)
+                s.da.to_hdf5(save_file_path_template.format("V"),"v",v)
