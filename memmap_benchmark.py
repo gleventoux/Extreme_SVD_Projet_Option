@@ -4,7 +4,7 @@ from svd_func import svd_numpy_naive
 import os 
 
 aspect_ratio = [0.1,0.5,1,2,10]
-matrix_sizes = [(100*x, 10*x) for x in range(1,11)]
+matrix_sizes = [(3*(10**x), (10**x)) for x in range(0,5)]
 matrix_paths = []
 
 benchmark_results = {}
@@ -12,6 +12,7 @@ NUMBER_OF_RUNS = 3
 decomposition_dir = './decomposition_results/'
 
 for row,col in matrix_sizes:
+    print(f"Matrice de taille {row}x{col}")
     matrix_name = f"rd_{row}x{col}"
     generate_random(matrix_name,row,col)
     matrix_path = file_path = os.path.join("matrix",matrix_name) + ".hdf5"
