@@ -11,6 +11,11 @@ python setup.py install
 
 ## Dépendances
 
+- [Scikit learn](https://scikit-learn.org/stable/index.html)
+```
+conda install scikit-learn
+```
+
 - [Dask](https://www.dask.org/)
 ```
 conda install dask
