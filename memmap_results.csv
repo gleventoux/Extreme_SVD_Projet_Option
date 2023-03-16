@@ -1,0 +1,6 @@
+function,matrix,time
+svd_numpy_naive,rd_3x1,0.02178102166658391
+svd_numpy_naive,rd_30x10,0.018254471000053247
+svd_numpy_naive,rd_300x100,0.05724473366668311
+svd_numpy_naive,rd_3000x1000,3.323175254999986
+svd_numpy_naive,rd_30000x10000,557.6076892753332
