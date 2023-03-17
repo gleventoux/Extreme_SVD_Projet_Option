@@ -179,13 +179,13 @@ def prepare_pypar_serial(matrix_filename, args, decomposition_dir):
 
 
     
-if __name__ == '__main__':
-    data_list = list()
-    tar_dir = Matrix
-    filename= 'random1Go.hdf5'
-    for iteration in range(5):
-        data_list.append(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.h5'))
-    #print(data_list)
-    #pypar_serial(data_list)
-    pypar_parallel(data_list,random=True)
+# if __name__ == '__main__':
+#     data_list = list()
+#     tar_dir = "./matrix/"
+#     filename= 'random1Go.hdf5'
+#     for iteration in range(5):
+#         data_list.append(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.h5'))
+#     #print(data_list)
+#     #pypar_serial(data_list)
+#     pypar_parallel(data_list,random=True)
     

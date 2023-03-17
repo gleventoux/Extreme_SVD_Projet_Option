@@ -1,7 +1,7 @@
 # Import
 import funcutils
 import svd_func
-#import xin_svd_func
+import xin_svd_func
 import os
 
 # Initialisation of global varaible and constants

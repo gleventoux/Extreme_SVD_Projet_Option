@@ -121,7 +121,7 @@ https://www.realpythonproject.com/how-to-benchmark-functions-in-python/
 pour installer le h5py avec parallèle acceleration, c'est plus vite de reinstall h5py
 
 ```bash
-conda unstall h5py
+conda uninstall h5py
 ```
 
 ```bash
@@ -135,6 +135,8 @@ $ which mpirun
 /anaconda/envs/env_name/bin/mpirun
 ```
 
+eventuellement ajouter pour un processeur Intel
+conda update intel-openmp.
 
 
 pour tester le code parallel
