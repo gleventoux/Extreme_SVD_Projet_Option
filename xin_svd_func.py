@@ -2,7 +2,7 @@
 import os
 import h5py
 import numpy as np
-
+from data_splitter import data_splitter
 # # num_processes = 4 
 # # script_file = 'xin_svd_func.py'  
 # # cmd_list = ['mpirun', '-np', str(num_processes), 'python3', script_file]
@@ -23,36 +23,6 @@ from pyparsvd.parsvd_parallel import ParSVD_Parallel
 
 # decomposition_dir=os.path.join(CFD,'decomposition_results')
 # Matrix=os.path.join(CFD,"matrix") 
-
-
-def svd_func_template(matrix_filename, decomposition_dir,vectors = True):
-    """
-    Perform a svd decomposition on a matrix stored at matrix_filename 
-
-    Parameters
-    ----------
-    matrix_filename : str
-        the path to the stored matrix in hdf5 format
-    decomposition_dir : str
-        path to the directory, where the singular values and right and left singular vecors are stored
-        in hdf5 format
-    vectors : bool, optional
-        Boolean enabling the return of the right and left singular vectors
-        (default is True)
-
-    Returns
-    -------
-    None
-        Side effect of writing the singular values and right and left singular vecors 
-        in the directory at decomposition_dir in an hdr5 format
-        Naming convention : - SVD_Method_Matrix_Name_U : Left Singular Vectors
-                            - SVD_Method_Matrix_Name_S : Singular Values (1D Vector if possible)
-                            - SVD_Method_Matrix_Name_V : Right Singular Vectors
-
-
-   """
-    pass
-
 
 # method for importing data from .h5 files into the forms suitable for pyparsvd serial calculation
 def load_h5_serial(filename,datasetname):
@@ -103,10 +73,10 @@ def load_h5_parallel(filename,comm,rank,nprocs,dataset):
     h5_file.close()
     return rval
 
-# data_list is generated from data_splitter.py data_splitter()
-def pypar_serial(filename, results_dir,random=False,K=10,ff=1.0):
+
+def pypar_serial(filename_list, results_dir,random=False,K=10,ff=1.0):
     SerSVD = ParSVD_Serial(K=K, ff=ff,low_rank=random,results_dir=results_dir)  
-    data_list=filename.copy()  
+    data_list=filename_list.copy()  
     data_init=data_list.pop(0)
     data_init=load_h5_serial(data_init,'dataset')
     SerSVD.initialize(data_init)
@@ -119,10 +89,10 @@ def pypar_serial(filename, results_dir,random=False,K=10,ff=1.0):
         del data 
     SerSVD.save()
     
-# data_list is generated from data_splitter.py data_splitter()
-def pypar_parallel(filenames, results_dir,random=False,K=10,ff=1.0):
+    
+def pypar_parallel(filename_list, results_dir,random=False,K=10,ff=1.0):
     ParSVD = ParSVD_Parallel(K=K, ff=ff, low_rank=random,results_dir=results_dir)
-    data_list=filenames.copy()
+    data_list=filename_list.copy()
     data_init=data_list.pop(0)
     data_init=load_h5_parallel(data_init,ParSVD.comm,ParSVD.rank,ParSVD.nprocs,'dataset')
     ParSVD.initialize(data_init)
@@ -139,26 +109,8 @@ def pypar_parallel(filenames, results_dir,random=False,K=10,ff=1.0):
     if ParSVD.rank == 0:
         ParSVD.save()
 
-def prepare_pypar_parallel(matrix_filename, args, decomposition_dir):
-    """
-    TODO
-    Prepare the matrix in the right form from only 1 hdf5.format to whatever pypar_parallel needs 
-
-    Parameters
-    ----------
-    matrix_filename : str
-        the path to the stored matrix in hdf5 format
-    decomposition_dir : str
-        path to the directory, where the prepared elements could be stored
-    args : 
-       TODO All the arguments you need for the function to work on its own. No need to be a dict (**kwargs)
-
-    Returns
-    -------
-        TODO ???
-    """ 
-
-def prepare_pypar_serial(matrix_filename, args, decomposition_dir):
+# data_list is generated from data_splitter.py data_splitter()                         
+def prepare_pypar(matrix_filename,tar_dir,niters,nb_cols):
     """
     TODO
     Prepare the matrix in the right form from only 1 hdf5.format to whatever pypar_serial needs 
@@ -169,19 +121,21 @@ def prepare_pypar_serial(matrix_filename, args, decomposition_dir):
         the path to the stored matrix in hdf5 format
     decomposition_dir : str
         path to the directory, where the prepared elements could be stored
-    args : 
-       TODO All the arguments you need for the function to work on its own. No need to be a dict (**kwargs)
-
+    niters : int
+        number of incorporation to do in the decomposition
+    nb_cols : int
+        number of columns in original matrix
+        
     Returns
     -------
-        TODO ???
+        filename_list : filenames of hdf5 files
     """ 
+    return data_splitter(matrix_filename,tar_dir,niters,nb_cols)
 
 
-    
 if __name__ == '__main__':
     data_list = list()
-    tar_dir = Matrix
+    tar_dir = 'Matrix'
     filename= 'random1Go.hdf5'
     for iteration in range(5):
         data_list.append(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.h5'))

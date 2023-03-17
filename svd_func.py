@@ -131,7 +131,7 @@ def svd_dask(matrix_filename, decomposition_dir, vectors = True):
             s.da.to_hdf5(save_file_path_template.format("V"),"v",v)
 
 
-def svd_sklearn(matrix_filename, decomposition_dir, vectors = True):
+def svd_sklearn(matrix_filename, decomposition_dir,vectors = True):
     """
     Perform a svd decomposition on a matrix stored at matrix_filename 
 
@@ -155,8 +155,6 @@ def svd_sklearn(matrix_filename, decomposition_dir, vectors = True):
                             - SVD_Method_Matrix_Name_S : Singular Values (1D Vector if possible)
                             - SVD_Method_Matrix_Name_V : Right Singular Vectors
     """
-
-
     with h5py.File(matrix_filename,"r") as f:
 
         # get matrix name

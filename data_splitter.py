@@ -26,17 +26,19 @@ def data_splitter(filename,tar_dir,niters,nb_cols):
             data_init=np.vstack((data_init,data))        
         print(f"loading dataset {i}")
     print("loaded successfully !")
-    filenames=list()
+    
+    filename_list=list()
     batch_size = int(nb_cols / niters)
     for iteration in range(niters):
         batch_data = data_init[:,iteration*batch_size:(iteration+1)*batch_size]
-        h5f = h5py.File(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.h5'), 'w')
+        h5f = h5py.File(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.hdf5'), 'w')
         h5f.create_dataset('dataset', data=batch_data)
         print(f"splitting data {iteration}")
-        filenames.append(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.h5'))
+        filename_list.append(os.path.join(tar_dir,f'splitted_{filename}_'+str(iteration)+'.hdf5'))
         h5f.close()
+        
     print("splitted successfully !")
-    return filenames
+    return filename_list
 
 # for test
 # generate random matrix and save it into several .h5 files
