@@ -120,7 +120,7 @@ def results_storer(results, results_file):
 
     """
 
-    with open(results_file, 'w', newline='') as csvfile:
+    with open(results_file, 'a', newline='') as csvfile:
         fieldnames = ['function', 'matrix', 'time'] # columns names in the .csv file
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader() # write columns names

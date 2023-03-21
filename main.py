@@ -50,6 +50,6 @@ for matrix_name in matrix_list[1:] :
     # Sklearn IPCA
     results = funcutils.timer(svd_func.svd_sklearn, matrix, args_standard[matrix_name], decomposition_dir)
     benchmark_results.update(results)
-    
-funcutils.results_storer(benchmark_results,'benchmark_results.csv')
+
+    funcutils.results_storer(benchmark_results,matrix_name+'_benchmark_results.csv')
 
