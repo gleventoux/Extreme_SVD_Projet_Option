@@ -120,15 +120,15 @@ def svd_dask(matrix_filename, decomposition_dir, vectors = True):
 
         # compute singular values and save them
         s.compute()
-        s.da.to_hdf5(save_file_path_template.format("S"),"s",s)
+        s.to_hdf5(save_file_path_template.format("S"),"s")
 
         if vectors:
 
             # compute and save left/right vectors
             u.compute()
             v.compute()
-            u.da.to_hdf5(save_file_path_template.format("U"),"u",u)
-            s.da.to_hdf5(save_file_path_template.format("V"),"v",v)
+            u.to_hdf5(save_file_path_template.format("U"),"u")
+            s.to_hdf5(save_file_path_template.format("V"),"v")
 
 
 def svd_sklearn(matrix_filename, decomposition_dir, vectors = True):
