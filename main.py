@@ -18,7 +18,7 @@ args_standard = { matrix :{ 'decomposition_dir':decomposition_dir} for matrix in
 args_pypar_serial = {'random1Go.hdf5': 'foo'}
 args_pypar_parallel = {'random1Go.hdf5': 'bar'}
 
-for matrix_name in matrix_list[0:] :
+for matrix_name in matrix_list[1:] :
     
     matrix = os.path.join("matrix",matrix_name) # path to matrix file
     
@@ -44,8 +44,8 @@ for matrix_name in matrix_list[0:] :
     # del prepared_stuff
 
     # Dask
-    # results = funcutils.timer(svd_func.svd_dask, matrix, args_standard[matrix_name], decomposition_dir)
-    # benchmark_results.update(results)
+    results = funcutils.timer(svd_func.svd_dask, matrix, args_standard[matrix_name], decomposition_dir)
+    benchmark_results.update(results)
 
     # Sklearn IPCA
     results = funcutils.timer(svd_func.svd_sklearn, matrix, args_standard[matrix_name], decomposition_dir)

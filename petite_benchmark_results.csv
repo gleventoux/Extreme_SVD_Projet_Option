@@ -1,3 +1,9 @@
 function,matrix,time
 svd_sklearn,random1Go,198.46173126359864
 svd_sklearn,petite,0.05521628259957652
+svd_dask,petite,0.09803117739998016
+svd_sklearn,petite,0.02783409959997698
+svd_dask,petite,0.10904070459982904
+svd_sklearn,petite,0.03113667939987863
+svd_dask,petite,0.09051449600001434
+svd_sklearn,petite,0.023350125199795003
