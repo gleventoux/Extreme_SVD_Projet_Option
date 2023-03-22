@@ -14,11 +14,11 @@ matrix_list = ['random1Go.hdf5','petite.hdf5'] # list of string, each being the 
 args_numpy = {'random1Go.hdf5':{'rows' : 25000, 'columns':5000, 'decomposition_dir':decomposition_dir},
               'petite.hdf5':{'rows' : 1000, 'columns':100, 'decomposition_dir':decomposition_dir}}
               
-args_standard = { 'petite.hdf5':{ 'decomposition_dir':decomposition_dir}}
+args_standard = { matrix :{ 'decomposition_dir':decomposition_dir} for matrix in matrix_list}
 args_pypar_serial = {'random1Go.hdf5': 'foo'}
 args_pypar_parallel = {'random1Go.hdf5': 'bar'}
 
-for matrix_name in matrix_list[1:] :
+for matrix_name in matrix_list[0:] :
     
     matrix = os.path.join("matrix",matrix_name) # path to matrix file
     
@@ -26,10 +26,10 @@ for matrix_name in matrix_list[1:] :
     # write the following line adapted to each decomposition function
     
     # Numpy memmap streaming & Numpy SVD
-    matrix_memmap_filename = funcutils.hdf5_to_memmap(matrix, args_numpy[matrix_name]['rows'],args_numpy[matrix_name]['columns'])
-    results = funcutils.timer(svd_func.svd_numpy_naive, matrix_memmap_filename,args_numpy[matrix_name],decomposition_dir,run_nbr = NUMBER_OF_RUNS)
-    benchmark_results.update(results)
-    funcutils.dat_cleaner('./matrix/')
+    # matrix_memmap_filename = funcutils.hdf5_to_memmap(matrix, args_numpy[matrix_name]['rows'],args_numpy[matrix_name]['columns'])
+    # results = funcutils.timer(svd_func.svd_numpy_naive, matrix_memmap_filename,args_numpy[matrix_name],decomposition_dir,run_nbr = NUMBER_OF_RUNS)
+    # benchmark_results.update(results)
+    # funcutils.dat_cleaner('./matrix/')
 
     # # PyParSerial
     # prepared_stuff = xin_svd_func.prepare_pypar_serial(matrix, None, decomposition_dir=decomposition_dir)
@@ -44,12 +44,12 @@ for matrix_name in matrix_list[1:] :
     # del prepared_stuff
 
     # Dask
-    results = funcutils.timer(svd_func.svd_dask, matrix, args_standard[matrix_name], decomposition_dir)
-    benchmark_results.update(results)
+    # results = funcutils.timer(svd_func.svd_dask, matrix, args_standard[matrix_name], decomposition_dir)
+    # benchmark_results.update(results)
 
     # Sklearn IPCA
     results = funcutils.timer(svd_func.svd_sklearn, matrix, args_standard[matrix_name], decomposition_dir)
     benchmark_results.update(results)
 
-    funcutils.results_storer(benchmark_results,matrix_name+'_benchmark_results.csv')
+    funcutils.results_storer(benchmark_results,matrix_name.split('.')[0]+'_benchmark_results.csv')
 
