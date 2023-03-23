@@ -1,3 +1,4 @@
 function,matrix,time
 svd_dask,random_3GB,365.03499824539995
 svd_sklearn,random_3GB,84.99234007039922
+svd_numpy_naive,random_3GB,227.81743882533192
